@@ -1,0 +1,10 @@
+Paper_ID,Semantic_Overlap_Factuality_Proxy_OpenAI,Citation_Coverage,ROUGE_rougeL_F1,BERTScore_F1,Rater_ID,Audience_Appropriateness_Rating,Factuality_Rating,Helpfulness_Rating
+P1_VDM,0.7304,0.3333,0.186,0.8091,Rater_1,5,5,4
+P1_VDM,0.7304,0.3333,0.186,0.8091,Rater_2,4,3,4
+P1_VDM,0.7304,0.3333,0.186,0.8091,Rater_3,5,5,5
+P2_MFP3D,0.5961,0.1429,0.1719,0.8482,Rater_1,3,4,3
+P2_MFP3D,0.5961,0.1429,0.1719,0.8482,Rater_2,3,3,4
+P2_MFP3D,0.5961,0.1429,0.1719,0.8482,Rater_3,4,4,3
+P3_MetaFood3D,0.7618,0.1667,0.1962,0.8299,Rater_1,5,4,4
+P3_MetaFood3D,0.7618,0.1667,0.1962,0.8299,Rater_2,5,5,3
+P3_MetaFood3D,0.7618,0.1667,0.1962,0.8299,Rater_3,4,5,4
