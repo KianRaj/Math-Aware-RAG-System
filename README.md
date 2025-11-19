@@ -146,9 +146,9 @@ Rated by 3 distinct raters on a 1-5 Likert scale.
 
 | Metric | Score (Avg) | Description |
 | :--- | :---: | :--- |
-| **Audience Appropriateness** | **4.6/5** | Did the output match the requested style (Technical vs Plain)? |
-| **Factuality** | **4.5/5** | Accuracy of the math and claims derived from the paper. |
-| **Helpfulness** | **4.2/5** | Utility of the generated scripts for a real presentation. |
+| **Audience Appropriateness** | **4/5** | Did the output match the requested style (Technical vs Plain)? |
+| **Factuality** | **3/5** | Accuracy of the math and claims derived from the paper. |
+| **Helpfulness** | **4/5** | Utility of the generated scripts for a real presentation. |
 
 > **Note:** Full evaluation logs and ROUGE scores can be found in the `evaluation/reports/` directory.
 ### EVALUATION REPORT AGGREGATED RESULTS
@@ -201,3 +201,4 @@ python result.py ## Run all the Evaluation folder python file one by one. last o
 
 ---
 **SYSTEM-WIDE AVERAGE SCORE: 77.38 / 100**
+
