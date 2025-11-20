@@ -11,7 +11,7 @@ The pipeline follows a modular RAG design optimized for scientific papers:
 1.  **Ingestion Layer:**
     * **Input:** PDF/LaTeX Papers.
     * **Processing:** `PyMuPDF` for text + Custom Regex for Math Cleaning.
-    * **Chunking:** Semantic chunking via `Spacy` (sentence-level).
+    * **Chunking:** Fixed chunking via `Spacy` (sentence-level).
 
 2.  **Retrieval Layer (Dense):**
     * **Embeddings:** OpenAI `text-embedding-3-small` (High semantic fidelity).
@@ -189,7 +189,7 @@ Quality Metrics:
   BERTScore_F1:    0.8299
 
 ```bash
-python result.py ## Run all the Evaluation folder python file one by one. last one result would look like 
+python result.py ## Run all the Evaluation folder python file one by one. at last resut would gives us our report
 ```
 
 
@@ -201,4 +201,5 @@ python result.py ## Run all the Evaluation folder python file one by one. last o
 
 ---
 **SYSTEM-WIDE AVERAGE SCORE: 77.38 / 100**
+
 
