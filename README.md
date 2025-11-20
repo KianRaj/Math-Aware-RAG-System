@@ -26,7 +26,10 @@ The pipeline follows a modular RAG design optimized for scientific papers:
 ---
 ## Pipeline Overview
 
-<img width="1020" height="418" alt="pipeline" src="https://github.com/user-attachments/assets/ffe41b5f-3c15-41de-b70c-4c71d11f5277" />
+<img width="6320" height="3656" alt="image" src="https://github.com/user-attachments/assets/3c2929ac-614c-497a-afa1-94d2793bf5b3" />
+
+
+
 
 
 
@@ -201,5 +204,6 @@ python result.py ## Run all the Evaluation folder python file one by one. at las
 
 ---
 **SYSTEM-WIDE AVERAGE SCORE: 77.38 / 100**
+
 
 
