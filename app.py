@@ -44,7 +44,7 @@ load_dotenv("Api_key.env")
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
 if not openai.api_key:
-    raise ValueError("❌ OpenAI API key not found. Please add it to Api_key.env.")
+    raise ValueError("OpenAI API key not found. Please add it to Api_key.env.")
 else:
     print("OpenAI API key loaded successfully for Gradio app.")
 
@@ -54,7 +54,7 @@ else:
 
 def saral_chat(query, mode="script", audience="general", top_k=5, history=[]):
     if not query.strip():
-        history.append({"role": "assistant", "content": "⚠️ Please enter a valid query."})
+        history.append({"role": "assistant", "content": "Please enter a valid query."})
         return history
 
     try:
@@ -62,7 +62,7 @@ def saral_chat(query, mode="script", audience="general", top_k=5, history=[]):
         if not collection_name:
             history.append({
                 "role": "assistant",
-                "content": "⚠️ No active paper found. Please upload a PDF before asking questions."
+                "content": "No active paper found. Please upload a PDF before asking questions."
             })
             return history
 
@@ -73,28 +73,28 @@ def saral_chat(query, mode="script", audience="general", top_k=5, history=[]):
         )
 
         provenance = "\n".join(
-            [f"📄 Page {c['page_number']} | Math: {c['contains_math']} → {c['sentence_chunk'][:200]}..."
+            [f"Page {c['page_number']} | Math: {c['contains_math']} → {c['sentence_chunk'][:200]}..."
              for c in context_used]
         )
 
         if history and "Slide" in history[-1].get("content", ""):
             prev = history[-1]["content"]
-            delta = "🔁 Updated: SARAL refined the script based on your latest prompt." if prev != answer else "✅ No major changes detected."
+            delta = "Updated: SARAL refined the script based on your latest prompt." if prev != answer else "✅ No major changes detected."
         else:
             delta = ""
 
-        response = f"{answer}\n\n---\n🔎 Source Context\n{provenance}"
+        response = f"{answer}\n\n---\nSource Context\n{provenance}"
 
         history.append({"role": "user", "content": query})
         history.append({"role": "assistant", "content": response})
 
     except Exception as e:
-        history.append({"role": "assistant", "content": f"❌ Error: {str(e)}"})
+        history.append({"role": "assistant", "content": f"Error: {str(e)}"})
 
     return history
 
 # ==============================================================
-# 3️⃣ PDF Upload → Extraction → Chunking → Embedding → ChromaDB update
+# PDF Upload → Extraction → Chunking → Embedding → ChromaDB update
 # ==============================================================
 
 def process_pdf(file_obj):
@@ -104,9 +104,9 @@ def process_pdf(file_obj):
     import shutil
     if os.path.exists("./saral_chroma_store"):
         shutil.rmtree("./saral_chroma_store")
-        print("🧹 Cleared old ChromaDB store.")
+        print("Cleared old ChromaDB store.")
     if not file_obj:
-        return "⚠️ Please upload a PDF."
+        return "Please upload a PDF."
 
     try:
         # Temporary save location
@@ -140,7 +140,7 @@ def process_pdf(file_obj):
                 })
 
         df = pd.DataFrame(pages_and_chunks)
-        print(f"✅ Created {len(df)} chunks from {num_pages} pages.")
+        print(f"Created {len(df)} chunks from {num_pages} pages.")
 
         # --- Embed dynamically with OpenAI ---
         model_name = "text-embedding-3-small"
@@ -155,11 +155,11 @@ def process_pdf(file_obj):
             all_embeddings.extend([r.embedding for r in response.data])
 
         df["embedding"] = all_embeddings
-        print(f"🧠 Generated {len(all_embeddings)} embeddings.")
+        print(f"Generated {len(all_embeddings)} embeddings.")
         # --- Update persistent ChromaDB ---
         if os.path.exists("./saral_chroma_store"):
             shutil.rmtree("./saral_chroma_store")
-            print("🧹 Old ChromaDB store cleared.")
+            print("Old ChromaDB store cleared.")
 
         client = chromadb.Client(chromadb.config.Settings(persist_directory="./saral_chroma_store"))
 
@@ -169,7 +169,7 @@ def process_pdf(file_obj):
         set_active_collection(collection_name)
 
 
-        print(f"📚 Using Chroma collection: {collection_name}")
+        print(f" Using Chroma collection: {collection_name}")
 
         ids = [f"new_chunk_{i}" for i in range(len(df))]
         metadatas = df[["page_number", "contains_math"]].to_dict(orient="records")
@@ -181,20 +181,20 @@ def process_pdf(file_obj):
             metadatas=metadatas,
         )
 
-        print(f"📦 Added {len(df)} new chunks to ChromaDB collection (auto-persisted).")
+        print(f"Added {len(df)} new chunks to ChromaDB collection (auto-persisted).")
 
 
-        return f"✅ Uploaded & processed {file_obj.name} — {num_pages} pages → {len(df)} chunks stored in ChromaDB."
+        return f"Uploaded & processed {file_obj.name} — {num_pages} pages → {len(df)} chunks stored in ChromaDB."
 
     except Exception as e:
-        return f"❌ Error processing file: {str(e)}"
+        return f"Error processing file: {str(e)}"
 
 # ==============================================================
-# 4️⃣ Build Gradio UI
+# Build Gradio UI
 # ==============================================================
 
 with gr.Blocks(theme=gr.themes.Soft()) as demo:
-    gr.Markdown("# 🤖 SARAL Chatbot (Theme 3 Prototype)")
+    gr.Markdown("# Math Aware RAG System")
     gr.Markdown("""
     SARAL can:
     -  Generate slides and scripts from uploaded research papers
@@ -211,7 +211,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
         pdf_file.change(fn=process_pdf, inputs=pdf_file, outputs=upload_output)
 
     # ---- Chat section ----
-    with gr.Tab("💬 SARAL Assistant"):
+    with gr.Tab("SARAL Assistant"):
         chatbot = gr.Chatbot(label="SARAL Conversation", type="messages")
         query = gr.Textbox(
             placeholder="e.g., Make a 7-slide talk for graduate students focusing on methods",
@@ -232,7 +232,7 @@ with gr.Blocks(theme=gr.themes.Soft()) as demo:
             )
             top_k = gr.Slider(3, 10, value=5, step=1, label="Context Chunks")
 
-        send_btn = gr.Button("🚀 Generate / Refine")
+        send_btn = gr.Button("Generate / Refine")
         clear_btn = gr.ClearButton(components=[chatbot], value="Clear Chat")
 
         state = gr.State([])
