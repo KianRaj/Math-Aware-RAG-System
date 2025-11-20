@@ -98,7 +98,11 @@ The pipeline follows a modular RAG design optimized for scientific papers:
 You can run the script directly to enter the interactive command-line interface:
 
 ```bash
-python saral.py
+python backend.py ## you can find it in src folder
+```
+
+```bash
+python app.py ## A normal UI interface
 ```
 ## Key Features & Implementation
 
@@ -205,6 +209,7 @@ python result.py ## Run all the Evaluation folder python file one by one. at las
 
 ---
 **SYSTEM-WIDE AVERAGE SCORE: 77.38 / 100**
+
 
 
 
