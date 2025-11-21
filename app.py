@@ -1,5 +1,4 @@
 # ==============================================================
-#  SARAL Chatbot UI (Theme 3 Extended)
 #  Adaptive + Math-Aware + Iterative Slide Refinement
 # ==============================================================
 
