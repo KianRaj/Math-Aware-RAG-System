@@ -168,7 +168,7 @@ python evaluate.py
 ```yaml
 --- Running Evaluation for P1_VDM ---
 Automatic Metrics:
-  Semantic_Overlap_Factuality_Proxy_OpenAI: 0.0
+  Semantic_Overlap_Factuality_Proxy_OpenAI: 0.7304
   Citation_Coverage: 0.3333
 Quality Metrics:
   ROUGE_rouge1_F1: 0.2679
@@ -178,7 +178,7 @@ Quality Metrics:
 
 --- Running Evaluation for P2_MFP3D ---
 Automatic Metrics:
-  Semantic_Overlap_Factuality_Proxy_OpenAI: 0.0
+  Semantic_Overlap_Factuality_Proxy_OpenAI: 0.5961
   Citation_Coverage: 0.1429
 Quality Metrics:
   ROUGE_rouge1_F1: 0.3203
@@ -188,7 +188,7 @@ Quality Metrics:
 
 --- Running Evaluation for P3_MetaFood3D ---
 Automatic Metrics:
-  Semantic_Overlap_Factuality_Proxy_OpenAI: 0.0
+  Semantic_Overlap_Factuality_Proxy_OpenAI: 0.7618
   Citation_Coverage: 0.1667
 Quality Metrics:
   ROUGE_rouge1_F1: 0.3547
@@ -209,6 +209,7 @@ python result.py ## Run all the Evaluation folder python file one by one. at las
 
 ---
 **SYSTEM-WIDE AVERAGE SCORE: 77.38 / 100**
+
 
 
 
